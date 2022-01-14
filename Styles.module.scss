@@ -1,0 +1,100 @@
+#header {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+#loginbutton {
+  background-color: #262e33; /* Green */
+  color: white;
+  padding: 8px 32px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-right: 50px;
+}
+
+#EdpContent {
+  margin-left: 100px;
+  margin-right: 100px; 
+  width: 85%;
+}
+
+#EdpHeader {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+#EdpText { 
+  font-size: 50px;
+}
+
+#SelectTimeRange {
+   width: 200px;
+   height: 30px;
+   font-weight: bold;
+   border-width: medium;
+   border-color: darkgray;
+   border-radius: 5px;
+   margin-right: 150px;
+}
+
+#Date {
+  margin-left: 0px;
+}
+
+#Search { 
+   width: 88%;
+   height: 40px;
+   margin-top: 10px;
+   border-radius: 8px;
+   font-size: 16px;
+   margin-bottom: 10px;
+}
+
+#TableRowCommon {
+  width: 100%;
+  padding: 8px 8px 8px 16px;
+  display: flex;
+  align-items: center;
+}
+
+#HeaderRow {
+    color: #e3e5e6;
+    width: 88%;
+    padding: 0px 4px 6px 10px;
+    display: flex;
+    align-items: center;
+    background: 0% 0% no-repeat padding-box padding-box #262e33;
+    font-size: 14px;
+    border-top: 1px solid #3d464c;
+    border-radius: 4px;
+}
+
+#DataSetName { 
+  flex-basis: 30%;
+}
+
+#Type {
+  flex-basis: 15%
+}
+
+#RefreshFrequencySchedule { 
+  flex-basis: 40%
+}
+
+#LastRefreshStatus {
+  flex-basis: 50%
+}
+
+#SlaComplaince {
+  flex-basis: 20%
+}

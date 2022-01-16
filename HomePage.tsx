@@ -1,13 +1,15 @@
 import * as React from "react";
 import styles from "./Styles.module.scss";
-import Select from 'react-select';
+import { data } from "./model";
 
 class HomePage extends React.Component {
+
+  
   getMainHeader = () => {
     return (
-      <div id={styles.header}>
+      <div className={styles.header}>
         <div
-          id={styles.loginbutton}
+          className={styles.loginbutton}
           onClick={() => console.log("Login to EDP admin console")}
         >
           Login to EDP Admin Console
@@ -19,11 +21,11 @@ class HomePage extends React.Component {
   getEDPDataHeader = () => {
     return (
       <>
-      <div id={styles.EdpHeader}>
-        <p id={styles.EdpText}> EDP Data Refresh </p>
+      <div className={styles.EdpHeader}>
+        <p className={styles.EdpText}> EDP Data Refresh </p>
         <div>
           <select
-            id={styles.SelectTimeRange}
+            className={styles.SelectTimeRange}
             value={"select"}
             onChange={() => {
               console.log("Select on change")
@@ -35,7 +37,7 @@ class HomePage extends React.Component {
           </select>
         </div>
       </div>
-      <p id={styles.Date}> Today, {new Date().toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })} </p>
+      <p className={styles.Date}> Today, {new Date().toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })} </p>
       </>
     )
   }
@@ -43,7 +45,7 @@ class HomePage extends React.Component {
   getSearchBar = () => {
   return (
     <div>
-      <input id={styles.Search}
+      <input className={styles.Search}
         type="text"
         placeholder="Search Dataset"
         onChange={() => {
@@ -57,37 +59,90 @@ class HomePage extends React.Component {
   getTableView = () => {
     return (
       <>      
-        <div id={styles.HeaderRow}>
-           <div id={styles.DataSetName}>
+        <div className={styles.HeaderRow}>
+           <div className={styles.DataSetName}>
               <p>Dataset Name</p>
            </div>
-           <div id={styles.Type}>
+           <div className={styles.Type}>
               <p>| Type</p>
            </div>
-           <div id={styles.RefreshFrequencySchedule}>
+           <div className={styles.RefreshFrequencySchedule}>
               <p>| Refresh Frequency Schedule</p>
            </div>
-           <div id={styles.LastRefreshStatus}>
+           <div className={styles.LastRefreshStatus}>
               <p>| Last Refresh Status</p>
            </div>
-           <div id={styles.SlaComplaince}>
+           <div className={styles.SlaComplaince}>
               <p>| SLA Complaince </p>
            </div>
         </div>
       </>
     )
-
   }
 
+  getSLAComplainceColor = (status: string) : string => { 
+    switch(status) {
+      case "low":
+        return "#fc3636"
+      case "medium": 
+        return "#ff6300"
+      case "high": 
+        return "#4ba247"
+    }
+    return "blue"
+  }
+
+  getDatasetsList = () => { 
+   return (
+     <>
+          {data.map((data) => {
+            return (
+          <> 
+       <div className={styles.TableRow}>
+           <div className={styles.DataSetName}>
+              <p>{data.dataset}</p>
+           </div>
+           <div className={styles.Type}>
+              <p>{data.type}</p>
+           </div>
+           <div className={styles.RefreshFrequencySchedule}>
+              <p> {data.refreshFrequencySchedule} </p>
+           </div>
+           <div className={styles.LastRefreshStatus}>
+              <p>{data.lastRefreshStatus}</p>
+           </div>
+           <div className={styles.SlaComplaince}>
+            <span className={styles.SlaContent}  style={{"--bgcolor": this.getSLAComplainceColor(data.slaCompliance.accuracy)} as React.CSSProperties}> A </span>
+            <span className={styles.SlaContent}  style={{"--bgcolor": this.getSLAComplainceColor(data.slaCompliance.completeness)} as React.CSSProperties}> Cm </span>
+            <span className={styles.SlaContent}  style={{"--bgcolor": this.getSLAComplainceColor(data.slaCompliance.consistency)} as React.CSSProperties}> Cn </span>
+            <span className={styles.SlaContent}  style={{"--bgcolor": this.getSLAComplainceColor(data.slaCompliance.timeliness)} as React.CSSProperties}> T </span>
+           </div>
+       </div>
+          </>
+            );
+          } 
+          )}
+     </>
+   )
+  }
 
   render() {
     return (
       <>
         {this.getMainHeader()}
-        <div id={styles.EdpContent}>
+        <div className={styles.EdpContent}>
           {this.getEDPDataHeader()}
           {this.getSearchBar()}
           {this.getTableView()}
+          {this.getDatasetsList()}
+          <p className={styles.Glossary}> 
+          <ul> 
+            <li> <b>Accuracy</b></li> 
+            <li> <b> Completeness </b> </li> 
+            <li><b> Correctness </b></li> 
+            <li> <b> Timeliness </b> </li> 
+          </ul>
+          </p>
         </div>
       </>
     )
